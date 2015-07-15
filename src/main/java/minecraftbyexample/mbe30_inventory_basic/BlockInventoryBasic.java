@@ -31,7 +31,7 @@ public class BlockInventoryBasic extends BlockContainer
 	{
 		super(Material.rock);
 		this.setCreativeTab(CreativeTabs.tabBlock);     // the block will appear on the Blocks tab.
-		this.setBlockBounds(1/16.0F, 0, 1/16.0F, 15/16.0F, 8/16.0F, 15/16.0F);
+		this.setBlockBounds(1/16.0F, 0, 1/16.0F, 15/16.0F, 15/16.0F, 15/16.0F);
 	}
 
 	// Called when the block is placed or loaded client side to get the tile entity for the block

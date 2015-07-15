@@ -1,10 +1,15 @@
 package minecraftbyexample.mbe30_inventory_basic;
 
+import minecraftbyexample.mbe31_inventory_furnace.TileInventoryFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * User: brandon3055
@@ -33,16 +38,20 @@ public class ContainerBasic extends Container {
 	private final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
 
 	private final int VANILLA_FIRST_SLOT_INDEX = 0;
+
 	private final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-	private final int TE_INVENTORY_SLOT_COUNT = 9;
+	private final int TE_INVENTORY_ROW_COUNT = 6;
+	private final int TE_INVENTORY_COLUMN_COUNT = 9;
+	private final int TE_INVENTORY_SLOT_COUNT = TE_INVENTORY_COLUMN_COUNT * TE_INVENTORY_ROW_COUNT;
 
 	public ContainerBasic(InventoryPlayer invPlayer, TileEntityInventoryBasic tileEntityInventoryBasic) {
+
 		this.tileEntityInventoryBasic = tileEntityInventoryBasic;
 
 		final int SLOT_X_SPACING = 18;
-    final int SLOT_Y_SPACING = 18;
+    	final int SLOT_Y_SPACING = 18;
 		final int HOTBAR_XPOS = 8;
-		final int HOTBAR_YPOS = 109;
+		final int HOTBAR_YPOS = 198;
 		// Add the players hotbar to the gui - the [xpos, ypos] location of each item
 		for (int x = 0; x < HOTBAR_SLOT_COUNT; x++) {
 			int slotNumber = x;
@@ -50,7 +59,7 @@ public class ContainerBasic extends Container {
 		}
 
 		final int PLAYER_INVENTORY_XPOS = 8;
-		final int PLAYER_INVENTORY_YPOS = 51;
+		final int PLAYER_INVENTORY_YPOS = 140;
 		// Add the rest of the players inventory to the gui
 		for (int y = 0; y < PLAYER_INVENTORY_ROW_COUNT; y++) {
 			for (int x = 0; x < PLAYER_INVENTORY_COLUMN_COUNT; x++) {
@@ -66,11 +75,15 @@ public class ContainerBasic extends Container {
 												  + ") and TileInventory (" + tileEntityInventoryBasic.getSizeInventory()+")");
 		}
 		final int TILE_INVENTORY_XPOS = 8;
-		final int TILE_INVENTORY_YPOS = 20;
+		final int TILE_INVENTORY_YPOS = 18;
 		// Add the tile inventory container to the gui
-		for (int x = 0; x < TE_INVENTORY_SLOT_COUNT; x++) {
-			int slotNumber = x;
-			addSlotToContainer(new Slot(tileEntityInventoryBasic, slotNumber, TILE_INVENTORY_XPOS + SLOT_X_SPACING * x, TILE_INVENTORY_YPOS));
+		for (int y = 0; y < TE_INVENTORY_ROW_COUNT; y++) {
+			for (int x = 0; x < TE_INVENTORY_COLUMN_COUNT; x++) {
+				int slotNumber = TE_INVENTORY_COLUMN_COUNT * y + x;
+				int xpos = TILE_INVENTORY_XPOS + x * SLOT_X_SPACING;
+				int ypos = TILE_INVENTORY_YPOS + y * SLOT_Y_SPACING;
+				addSlotToContainer(new InventorySlot(tileEntityInventoryBasic, slotNumber,  xpos, ypos));
+			}
 		}
 	}
 
@@ -130,5 +143,18 @@ public class ContainerBasic extends Container {
 	{
 		super.onContainerClosed(playerIn);
 		this.tileEntityInventoryBasic.closeInventory(playerIn);
+	}
+
+	public class InventorySlot extends Slot {
+		public InventorySlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+			super(inventoryIn, index, xPosition, yPosition);
+		}
+
+		// if this function returns false, the player won't be able to insert the given item into this slot
+		@Override
+		public boolean isItemValid(ItemStack stack) {
+
+			return TileEntityInventoryBasic.isItemValidForSlotStatic(0,stack);
+		}
 	}
 }

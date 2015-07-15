@@ -11,6 +11,8 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * User: brandon3055
@@ -20,8 +22,10 @@ import java.util.Arrays;
  */
 public class TileEntityInventoryBasic extends TileEntity implements IInventory {
 	// Create and initialize the items variable that will store store the items
-	final int NUMBER_OF_SLOTS = 9;
+	final int NUMBER_OF_SLOTS = 54;
 	private ItemStack[] itemStacks = new ItemStack[NUMBER_OF_SLOTS];
+	private static Set<String> filter = new HashSet<String>(Arrays.asList("Cobblestone", "Chest"));
+
 
 	/* The following are some IInventory methods you are required to override */
 
@@ -98,7 +102,11 @@ public class TileEntityInventoryBasic extends TileEntity implements IInventory {
 	// inserting items via the gui
 	@Override
 	public boolean isItemValidForSlot(int slotIndex, ItemStack itemstack) {
-		return true;
+		return isItemValidForSlotStatic(slotIndex, itemstack);
+	}
+
+	public static boolean isItemValidForSlotStatic(int slotIndex, ItemStack itemstack) {
+		return filter.contains(itemstack.getDisplayName());
 	}
 
 	// This is where you save any data that you don't want to lose when the tile entity unloads

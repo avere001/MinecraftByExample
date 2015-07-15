@@ -21,7 +21,7 @@ import java.awt.*;
 public class GuiInventoryBasic extends GuiContainer {
 
 	// This is the resource location for the background image for the GUI
-	private static final ResourceLocation texture = new ResourceLocation("minecraftbyexample", "textures/gui/mbe30_inventory_basic_bg.png");
+	private static final ResourceLocation texture = new ResourceLocation("minecraftbyexample", "textures/gui/chest.png");
 	private TileEntityInventoryBasic tileEntityInventoryBasic;
 
 	public GuiInventoryBasic(InventoryPlayer invPlayer, TileEntityInventoryBasic tile) {
@@ -29,7 +29,7 @@ public class GuiInventoryBasic extends GuiContainer {
 		tileEntityInventoryBasic = tile;
 		// Set the width and height of the gui.  Should match the size of the texture!
 		xSize = 176;
-		ySize = 133;
+		ySize = 221;
 	}
 
 	// draw the background for the GUI - rendered first

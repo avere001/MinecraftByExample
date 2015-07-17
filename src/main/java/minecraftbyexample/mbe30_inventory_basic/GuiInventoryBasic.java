@@ -7,6 +7,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
@@ -23,6 +24,8 @@ public class GuiInventoryBasic extends GuiContainer {
 	// This is the resource location for the background image for the GUI
 	private static final ResourceLocation texture = new ResourceLocation("minecraftbyexample", "textures/gui/chest.png");
 	private TileEntityInventoryBasic tileEntityInventoryBasic;
+
+	static int test = 1;
 
 	public GuiInventoryBasic(InventoryPlayer invPlayer, TileEntityInventoryBasic tile) {
 		super(new ContainerBasic(invPlayer, tile));
@@ -49,5 +52,8 @@ public class GuiInventoryBasic extends GuiContainer {
 		final int LABEL_XPOS = 5;
 		final int LABEL_YPOS = 5;
 		fontRendererObj.drawString(tileEntityInventoryBasic.getDisplayName().getUnformattedText(), LABEL_XPOS, LABEL_YPOS, Color.darkGray.getRGB());
+		//Minecraft.getMinecraft().thePlayer.sendChatMessage(Integer.toString(test));
+		//drawRect(5, 5, 200, 200, 0xFFFF0000);
+		test++;
 	}
 }

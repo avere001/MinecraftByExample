@@ -1,6 +1,9 @@
 package minecraftbyexample;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.common.Loader;
+
+import java.io.File;
 
 /**
  * CommonProxy is used to set up the mod and start it running.  It contains all the code that should run on both the
@@ -67,6 +70,10 @@ public abstract class CommonProxy {
     minecraftbyexample.mbe40_hud_overlay.StartupCommon.initCommon();
     minecraftbyexample.mbe60_network_messages.StartupCommon.initCommon();
     minecraftbyexample.testingarea.StartupCommon.initCommon();
+
+
+    File config_dir = new File(Loader.instance().getConfigDir().getPath() + "/" + MinecraftByExample.MODID);
+    config_dir.mkdir();
   }
 
   /**

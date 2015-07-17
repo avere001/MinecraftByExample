@@ -1,0 +1,6 @@
+{
+  "name": "filtered_ore_chest",
+  "color": 0,
+  "mode": "whitelist",
+  "items:": ["Dirt","Chest"]
+}

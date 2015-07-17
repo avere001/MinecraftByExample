@@ -1,0 +1,11 @@
+Filtered Chests will have same recipe as vanilla but with cobble/iron/redstone/sapling/etc in the center that dictates the filter
+
+steps:
+//Crafting recipe with nbt data
+On placement, create tile entity and pass it nbt data
+On break, save nbt data
+On world unload, save nbt
+On world load, load nbt
+
+later:
+custom icon, model for each filtered chest.

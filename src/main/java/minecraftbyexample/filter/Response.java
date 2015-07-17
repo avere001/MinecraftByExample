@@ -1,4 +1,4 @@
-package filter;
+package minecraftbyexample.filter;
 
 import java.util.Map;
 

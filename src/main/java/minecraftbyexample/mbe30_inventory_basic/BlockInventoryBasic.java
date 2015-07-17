@@ -1,6 +1,7 @@
 package minecraftbyexample.mbe30_inventory_basic;
 
 import minecraftbyexample.MinecraftByExample;
+import minecraftbyexample.filter.FilterContainer;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -45,9 +46,13 @@ public class BlockInventoryBasic extends BlockContainer
 	// In this block it is used to open the blocks gui when right clicked by a player
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
+
 		// Uses the gui handler registered to your mod to open the gui for the given gui id
 		// open on the server side only  (not sure why you shouldn't open client side too... vanilla doesn't, so we better not either)
 		if (worldIn.isRemote) return true;
+
+		//FIXME: move to init. this is here for testing!
+		FilterContainer tmp = new FilterContainer();
 
 		playerIn.openGui(MinecraftByExample.instance, GuiHandlerMBE30.getGuiID(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;

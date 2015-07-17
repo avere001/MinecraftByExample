@@ -41,6 +41,7 @@ public class GuiInventoryBasic extends GuiContainer {
 		// Bind the image texture of our custom container
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 		// Draw the image
+		drawRect(5, 5, 200, 200, 0xFF00FFFF);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 	}
@@ -53,7 +54,7 @@ public class GuiInventoryBasic extends GuiContainer {
 		final int LABEL_YPOS = 5;
 		fontRendererObj.drawString(tileEntityInventoryBasic.getDisplayName().getUnformattedText(), LABEL_XPOS, LABEL_YPOS, Color.darkGray.getRGB());
 		//Minecraft.getMinecraft().thePlayer.sendChatMessage(Integer.toString(test));
-		//drawRect(5, 5, 200, 200, 0xFFFF0000);
+
 		test++;
 	}
 }
